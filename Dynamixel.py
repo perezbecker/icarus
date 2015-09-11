@@ -49,9 +49,9 @@ class dynamixel():
                 checksum += val
             checksum = 255 - ((checksum)%256)
             self.s_port.write(chr(checksum))
-            print "dynamixel set_ax_reg is working"
+            #print "dynamixel set_ax_reg is working"
         else:
-            print "dynamixel set_ax_reg error no port open"
+            #print "dynamixel set_ax_reg error no port open"
             return False
         return True
   
@@ -66,7 +66,7 @@ class dynamixel():
         vals = list()
         #length = 4
         if self.s_port.isOpen():
-            print "TESTING GETREG"
+            #print "TESTING GETREG"
             #checksum = 255 - (( 4 + ins + ID + regstart + rlength)%256)
             #pad, pad, id, length, ins, params[], checksum
             #params=(regstart, rlength, checksum)
@@ -78,7 +78,7 @@ class dynamixel():
             vals.append(self.s_port.read()) # ID
             vals.append(self.s_port.read()) # length
             vals.append(self.s_port.read()) #error
-            print "vals =", vals
+            #print "vals =", vals
             if '' in vals:
                 print "error found '' in vals recieved", vals
                 return None
@@ -97,9 +97,9 @@ class dynamixel():
                 ord_vals.append(c) 
             checksum = 255 -((checksum)%256)
             check = ord(self.s_port.read())
-            print "ord_vals=", ord_vals
+            #print "ord_vals=", ord_vals
             if (checksum==check or checksum==check+1 or checksum==check-1):#rounding errors
-                print "I am returning this", ord_vals
+                #print "I am returning this", ord_vals
                 return ord_vals[3:]
             else:
                 print 'rec error packet = ',ord_vals

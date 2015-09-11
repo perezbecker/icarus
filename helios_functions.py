@@ -26,12 +26,12 @@ def resetdyn():
     return_speed=[100]
     if return_speed:
         #print "set speed = ", speed, " dynamixel returned speed of ", return_speed[0]
-        if speed == return_speed[0]:
+        #if speed == return_speed[0]:
             #print"data send recieve test passed"  
         for pos, delay in positions_delay:
             ax12.set_ax_reg(ID, POS_REG, ([(pos%256),(pos>>8)]))
             time.sleep(delay)
-    else:
+    #else:
         #print "error setting and getting ax data"
     #print "test complete"
     
@@ -54,12 +54,12 @@ def resetdyn():
     return_speed=[100]
     if return_speed:
         #print "set speed = ", speed, " dynamixel returned speed of ", return_speed[0]
-        if speed == return_speed[0]:
+        #if speed == return_speed[0]:
             #print"data send recieve test passed"  
         for pos, delay in positions_delay:
             ax12.set_ax_reg(ID, POS_REG, ([(pos%256),(pos>>8)]))
             time.sleep(delay)
-    else:
+    #else:
         #print "error setting and getting ax data"
     #print "test complete"
     
@@ -88,12 +88,12 @@ def movedyn(position_ID1, position_ID2):
         return_speed=[100]
         if return_speed:
             #print "set speed = ", speed, " dynamixel returned speed of ", return_speed[0]
-            if speed == return_speed[0]:
+            #if speed == return_speed[0]:
                 #print"data send recieve test passed"  
             for pos, delay in positions_delay:
                 ax12.set_ax_reg(ID, POS_REG, ([(pos%256),(pos>>8)]))
                 time.sleep(delay)
-        else:
+        #else:
             #print "error setting and getting ax data"
         #print "test complete"
     
@@ -116,13 +116,25 @@ def movedyn(position_ID1, position_ID2):
         return_speed=[100]
         if return_speed:
             #print "set speed = ", speed, " dynamixel returned speed of ", return_speed[0]
-            if speed == return_speed[0]:
+            #if speed == return_speed[0]:
                 #print"data send recieve test passed"  
             for pos, delay in positions_delay:
                 ax12.set_ax_reg(ID, POS_REG, ([(pos%256),(pos>>8)]))
                 time.sleep(delay)
-        else:
+        #else:
             #print "error setting and getting ax data"
         #print "test complete"
     else:
         print "Error: Position out of safety bounds"
+
+def alt_to_pos2(alt):
+    pos2 = int((alt + 60.)*1024./300.)
+    return pos2
+
+
+
+
+def az_to_pos1(az):
+    pos1 = int((az -30.)*1024./300.) 
+    return pos1
+    
