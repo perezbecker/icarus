@@ -1,5 +1,6 @@
 import ephem
-import Dynamixel
+#import Dynamixel
+import helios_functions 
 
 
 target=[1.0,1.0] #alt,az in radians
