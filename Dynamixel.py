@@ -10,6 +10,7 @@ sudo chmod a+rw /dev/"ttyUSB1"
 
 '''
 from Ports import Port
+import time
 
 # commands
 READDATA = 2
@@ -30,9 +31,9 @@ class dynamixel():
         #need to put these in a text file
         self.kins = ({'AX_READ_DATA':2, 'AX_WRITE_DATA':3})
             
-    def __del__(self):#not needed just lets me know if dynamixel gets destroyed for some reason **remove this
-        class_name = self.__class__.__name__
-        print class_name, "class function deleted"
+    # def __del__(self):#not needed just lets me know if dynamixel gets destroyed for some reason **remove this
+    #     class_name = self.__class__.__name__
+    #     print class_name, "class function deleted"
      
     #send an instruction to dynamixel
     #only difference between this and set reg is reg is a parameter 
@@ -107,35 +108,155 @@ class dynamixel():
         else: 
             print "no serial port open"#should I put in a question box to open the port
             
+    def resetdyn():
+        
+        #Reset Dynamixel 2
+        
+        speed = 100
+        ID = 2
+        SPEED_REG = 32
+        POS_REG = 30
+        positions_delay = list([(512,1)])
+        ax12 = dynamixel()
+        #test serial ports
+        print ax12.port.test_ports()
+        #test motors
+        print "moving dynamixel"
+        ax12.set_ax_reg(ID, SPEED_REG, ([(speed%256),(speed>>8)]))
+        #test that the speed is set corectly
+        return_speed =  ax12.get_reg(ID, ins=READDATA, regstart=SPEED_REG, rlength=1)
+        print return_speed
+        return_speed=[100]
+        if return_speed:
+            print "set speed = ", speed, " dynamixel returned speed of ", return_speed[0]
+            if speed == return_speed[0]:
+                print"data send recieve test passed"  
+            for pos, delay in positions_delay:
+                ax12.set_ax_reg(ID, POS_REG, ([(pos%256),(pos>>8)]))
+                time.sleep(delay)
+        else:
+            print "error setting and getting ax data"
+        print "test complete"
+        
+        #Reset Dynamixel 1
+        
+        speed = 100
+        ID = 1
+        SPEED_REG = 32
+        POS_REG = 30
+        positions_delay = list([(512,1)])
+        ax12 = dynamixel()
+        #test serial ports
+        print ax12.port.test_ports()
+        #test motors
+        print "moving dynamixel"
+        ax12.set_ax_reg(ID, SPEED_REG, ([(speed%256),(speed>>8)]))
+        #test that the speed is set corectly
+        return_speed =  ax12.get_reg(ID, ins=READDATA, regstart=SPEED_REG, rlength=1)
+        print return_speed
+        return_speed=[100]
+        if return_speed:
+            print "set speed = ", speed, " dynamixel returned speed of ", return_speed[0]
+            if speed == return_speed[0]:
+                print"data send recieve test passed"  
+            for pos, delay in positions_delay:
+                ax12.set_ax_reg(ID, POS_REG, ([(pos%256),(pos>>8)]))
+                time.sleep(delay)
+        else:
+            print "error setting and getting ax data"
+        print "test complete"
+        
+        
+
+    def movedyn(position_ID1, position_ID2):
+        
+        #Move Dynamixel 1
+        
+        speed = 100
+        ID = 1
+        SPEED_REG = 32
+        POS_REG = 30
+        positions_delay = list([(position_ID1,1)])
+        ax12 = dynamixel()
+        #test serial ports
+        print ax12.port.test_ports()
+        #test motors
+        print "moving dynamixel"
+        ax12.set_ax_reg(ID, SPEED_REG, ([(speed%256),(speed>>8)]))
+        #test that the speed is set corectly
+        return_speed =  ax12.get_reg(ID, ins=READDATA, regstart=SPEED_REG, rlength=1)
+        print return_speed
+        return_speed=[100]
+        if return_speed:
+            print "set speed = ", speed, " dynamixel returned speed of ", return_speed[0]
+            if speed == return_speed[0]:
+                print"data send recieve test passed"  
+            for pos, delay in positions_delay:
+                ax12.set_ax_reg(ID, POS_REG, ([(pos%256),(pos>>8)]))
+                time.sleep(delay)
+        else:
+            print "error setting and getting ax data"
+        print "test complete"
+        
+        #Move Dynamixel 2
+        
+        speed = 100
+        ID = 2
+        SPEED_REG = 32
+        POS_REG = 30
+        positions_delay = list([(position_ID2,1)])
+        ax12 = dynamixel()
+        #test serial ports
+        print ax12.port.test_ports()
+        #test motors
+        print "moving dynamixel"
+        ax12.set_ax_reg(ID, SPEED_REG, ([(speed%256),(speed>>8)]))
+        #test that the speed is set corectly
+        return_speed =  ax12.get_reg(ID, ins=READDATA, regstart=SPEED_REG, rlength=1)
+        print return_speed
+        return_speed=[100]
+        if return_speed:
+            print "set speed = ", speed, " dynamixel returned speed of ", return_speed[0]
+            if speed == return_speed[0]:
+                print"data send recieve test passed"  
+            for pos, delay in positions_delay:
+                ax12.set_ax_reg(ID, POS_REG, ([(pos%256),(pos>>8)]))
+                time.sleep(delay)
+        else:
+            print "error setting and getting ax data"
+        print "test complete"
+
+
+
             
-if __name__ == '__main__':
-    import time
-    speed = 100
-    ID = 1
-    SPEED_REG = 32
-    POS_REG = 30
-    #positions_delay = list([(400,2), (600,2), (512,2)])
-    positions_delay = list([(700,1),(512,2)])
-    ax12 = dynamixel()
-    #test serial ports
-    print "Testpoint1"
-    print ax12.port.test_ports()
-    print "Testpoint2"
-    #test motors
-    print "moving dynamixel"
-    ax12.set_ax_reg(ID, SPEED_REG, ([(speed%256),(speed>>8)]))
-    #test that the speed is set corectly
-    return_speed =  ax12.get_reg(ID, ins=READDATA, regstart=SPEED_REG, rlength=1)
-    print return_speed
-    return_speed=[175]
-    if return_speed:
-        print "set speed = ", speed, " dynamixel returned speed of ", return_speed[0]
-        if speed == return_speed[0]:
-            print"data send recieve test passed"  
-        for pos, delay in positions_delay:
-            ax12.set_ax_reg(ID, POS_REG, ([(pos%256),(pos>>8)]))
-            time.sleep(delay)
-    else:
-        print "error setting and getting ax data"
-    print "test complete"
+# if __name__ == '__main__':
+#     import time
+#     speed = 100
+#     ID = 1
+#     SPEED_REG = 32
+#     POS_REG = 30
+#     #positions_delay = list([(400,2), (600,2), (512,2)])
+#     positions_delay = list([(700,1),(512,2)])
+#     ax12 = dynamixel()
+#     #test serial ports
+#     print "Testpoint1"
+#     print ax12.port.test_ports()
+#     print "Testpoint2"
+#     #test motors
+#     print "moving dynamixel"
+#     ax12.set_ax_reg(ID, SPEED_REG, ([(speed%256),(speed>>8)]))
+#     #test that the speed is set corectly
+#     return_speed =  ax12.get_reg(ID, ins=READDATA, regstart=SPEED_REG, rlength=1)
+#     print return_speed
+#     return_speed=[100]
+#     if return_speed:
+#         print "set speed = ", speed, " dynamixel returned speed of ", return_speed[0]
+#         if speed == return_speed[0]:
+#             print"data send recieve test passed"  
+#         for pos, delay in positions_delay:
+#             ax12.set_ax_reg(ID, POS_REG, ([(pos%256),(pos>>8)]))
+#             time.sleep(delay)
+#     else:
+#         print "error setting and getting ax data"
+#     print "test complete"
             

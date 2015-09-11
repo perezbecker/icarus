@@ -1,4 +1,6 @@
 import ephem
+import Dynamixel
+
 
 target=[1.0,1.0] #alt,az in radians
 
@@ -27,3 +29,7 @@ for i in xrange(24):
 
     icarus_desired=[0.5*target[0]+0.5*sol[0],0.5*target[1]+0.5*sol[1]]
     print('%s %s %s %f %f' % (time, sol_obj.alt, sol_obj.az,icarus_desired[0],icarus_desired[1]))
+
+
+movedyn(400,400)
+resetdyn()
