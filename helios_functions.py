@@ -1,5 +1,8 @@
 import time
-import Dynamixel
+import Dynamixel as dm
+
+READDATA = 2
+WRITE_DATA = 3
 
 
 def resetdyn():
@@ -11,7 +14,7 @@ def resetdyn():
     SPEED_REG = 32
     POS_REG = 30
     positions_delay = list([(512,1)])
-    ax12 = dynamixel()
+    ax12 = dm.dynamixel()
     #test serial ports
     print ax12.port.test_ports()
     #test motors
@@ -39,7 +42,7 @@ def resetdyn():
     SPEED_REG = 32
     POS_REG = 30
     positions_delay = list([(512,1)])
-    ax12 = dynamixel()
+    ax12 = dm.dynamixel()
     #test serial ports
     print ax12.port.test_ports()
     #test motors
@@ -63,6 +66,8 @@ def resetdyn():
     
 
 def movedyn(position_ID1, position_ID2):
+
+    if position_ID1 >= 205 and position_ID1 <= 819 and position_ID2 >= 205 and position_ID2 <= 819
     
     #Move Dynamixel 1
     
@@ -71,7 +76,7 @@ def movedyn(position_ID1, position_ID2):
     SPEED_REG = 32
     POS_REG = 30
     positions_delay = list([(position_ID1,1)])
-    ax12 = dynamixel()
+    ax12 = dm.dynamixel()
     #test serial ports
     print ax12.port.test_ports()
     #test motors
@@ -99,7 +104,7 @@ def movedyn(position_ID1, position_ID2):
     SPEED_REG = 32
     POS_REG = 30
     positions_delay = list([(position_ID2,1)])
-    ax12 = dynamixel()
+    ax12 = dm.dynamixel()
     #test serial ports
     print ax12.port.test_ports()
     #test motors

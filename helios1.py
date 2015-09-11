@@ -1,6 +1,6 @@
 import ephem
 #import Dynamixel
-import helios_functions 
+import helios_functions as hf 
 
 
 target=[1.0,1.0] #alt,az in radians
@@ -32,5 +32,6 @@ for i in xrange(24):
     print('%s %s %s %f %f' % (time, sol_obj.alt, sol_obj.az,icarus_desired[0],icarus_desired[1]))
 
 
-movedyn(400,400)
-resetdyn()
+hf.movedyn(400,400)
+hf.resetdyn()
+hf.movedyn(300,300)
