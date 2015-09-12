@@ -12,15 +12,24 @@ datetimeloc=f.readline().rstrip('\n').split(',')
 # 0-date; 1-time; 2-lat; 3-lon; 4-elevation, 5-temp
 f.close()
 
-for i in xrange(80):
+print "Date:", datetimeloc[0]
+print "Time:", datetimeloc[1]
+print "Lat:", datetimeloc[2]
+print "Lon:", datetimeloc[3]
+print "Ele:", datetimeloc[4]
+print "Temp:", datetimeloc[5]
+
+
+
+for i in xrange(200):
     hour=str(i).zfill(2)
     time=hour+":00:00"
 
 
     gatech = ephem.Observer()
-    gatech.date = datetimeloc[0]+' '+time #'1984/5/30 16:22:56'
-    gatech.lat = datetimeloc[2]  #'33.775867'
-    gatech.lon = datetimeloc[3] #'-84.39733'
+    gatech.date = '2015/09/12 00:57:00' #datetimeloc[0]+' '+time #'1984/5/30 16:22:56'
+    gatech.lat = '37.77648' #datetimeloc[2]  #'33.775867'
+    gatech.lon = '-122.41755' #datetimeloc[3] #'-84.39733'
 
     gatech.elevation = int(datetimeloc[4])
     gatech.temp = float(datetimeloc[5])
