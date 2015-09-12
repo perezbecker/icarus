@@ -12,7 +12,7 @@ j=0
 while j<1: 
     gpstest=hf.get_gps()
     print gpstest[0]
-    if(gpstest[0] != "No Data"):
+    if(gpstest[0] != "No data"):
         print "GPS sync sucessful"
         j=1
     else:
