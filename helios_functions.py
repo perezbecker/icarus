@@ -74,7 +74,7 @@ def resetdyn():
 
 def movedyn(position_ID1, position_ID2):
 
-    if(position_ID1 >= 205 and position_ID1 <= 819 and position_ID2 >= 205 and position_ID2 <= 819):
+    if(position_ID1 >= 1 and position_ID1 <= 1023 and position_ID2 >= 205 and position_ID2 <= 819):
     
         #Move Dynamixel 1
     

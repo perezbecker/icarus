@@ -45,7 +45,7 @@ for i in xrange(200):
 
 
     gatech = ephem.Observer()
-    gatech.date = gps_datetime.strftime("%Y/%m/%d %H:%M:%S") #datetimeloc[0]+' '+time #'1984/5/30 16:22:56'
+    gatech.date = '2015/09/12'+' '+time #gps_datetime.strftime("%Y/%m/%d %H:%M:%S") #datetimeloc[0]+' '+time #'1984/5/30 16:22:56'
     gatech.lat =  str(gps_lat) #'37.77648' #datetimeloc[2]  #'33.775867'
     gatech.lon =  str(gps_lon) #'-122.41755' #datetimeloc[3] #'-84.39733'
 
@@ -63,7 +63,7 @@ for i in xrange(200):
 
     print('%s %s %s %i %i' % (time, sol_obj.alt, sol_obj.az,hf.alt_to_pos2(sol_alt),hf.az_to_pos1(sol_az)))
 
-    if(hf.az_to_pos1(sol_az) >= 205 and hf.az_to_pos1(sol_az) <= 819):
+    if(hf.az_to_pos1(sol_az) >= 1 and hf.az_to_pos1(sol_az) <= 1023):
         if(hf.alt_to_pos2(sol_alt) >= 205 and hf.alt_to_pos2(sol_alt) <= 819): 
             hf.movedyn(hf.az_to_pos1(sol_az),hf.alt_to_pos2(sol_alt))
             t.sleep(2)
