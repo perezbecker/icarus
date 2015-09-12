@@ -11,12 +11,12 @@ while i<1:
     	report = session.next()
 		# Wait for a 'TPV' report and display the current time
 		# To see all report data, uncomment the line below
-	print report
+	#print report
         if report['class'] == 'TPV':
             if hasattr(report, 'lon'):
-                longitude=report.lon
+                lon=report.lon
             if hasattr(report, 'lat'):
-                latitude=report.lat
+                lat=report.lat
             if hasattr(report, 'time'):
                 time=report.time
             if hasattr(report, 'alt'):
