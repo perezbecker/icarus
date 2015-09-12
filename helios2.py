@@ -3,7 +3,7 @@ import helios_functions as hf
 import time as t
 import datetime
 
-target=[1.0,1.0] #alt,az in radians
+target=[3.14159/2.,3.14159] #alt,az in radians
 
 rad2deg=180./3.14159
 
@@ -55,11 +55,12 @@ for i in xrange(60):
     sol_obj = ephem.Sun(gatech)
     sol=[sol_obj.alt, sol_obj.az]
 
-    #icarus_desired=[0.5*target[0]+0.5*sol[0],0.5*target[1]+0.5*sol[1]]
+    icarus_desired=[0.5*target[0]+0.5*sol[0],0.5*target[1]+0.5*sol[1]]
     #print('%s %s %s %f %f' % (time, sol_obj.alt, sol_obj.az,icarus_desired[0],icarus_desired[1]))
     
     sol_alt=sol[0]*rad2deg
     sol_az=sol[1]*rad2deg
+ 
 
     print('%s %s %s %i %i' % (time, sol_obj.alt, sol_obj.az,hf.alt_to_pos2(sol_alt),hf.az_to_pos1(sol_az)))
 
