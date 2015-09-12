@@ -135,7 +135,7 @@ def movedyn(position_ID1, position_ID2):
         print "Error: Position out of safety bounds"
 
 def alt_to_pos2(alt):
-    pos2 = int((alt + 60.)*1024./300.)
+    pos2 = -1*(int((alt + 60.)*1024./300.)-512)+512
     return pos2
 
 

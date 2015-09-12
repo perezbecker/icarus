@@ -10,15 +10,12 @@ rad2deg=180./3.14159
 print "Obtaining GPS data"
 j=0
 while j<1: 
-    gpstest=hf.get_gps()
-    print gpstest[0]
-    if(gpstest[0] != "No data"):
-        print "GPS sync sucessful"
+    datetimeloc=hf.get_gps()
+    if(datetimeloc[0] != "No data" and datetimeloc[1] != "No data" and datetimeloc[2] != "No data"):
+        print "GPS sync successful"
         j=1
     else:
         j=0
-
-
 
 
 # GET DateTimeLoc FROM FILE
@@ -34,15 +31,13 @@ while j<1:
 # print "Ele:", datetimeloc[4]
 # print "Temp:", datetimeloc[5]
 
-#GET DateTimeLoc FROM GPS
-datetimeloc=hf.get_gps()
 
 gps_datetime=datetime.datetime.strptime(str(datetimeloc[0]), "%Y-%m-%dT%H:%M:%S.%fZ")
 gps_lat=datetimeloc[1]
 gps_lon=datetimeloc[2]
 gps_alt=datetimeloc[3]
 
-print "DateTime: ",gps_datetime.strftime("%Y/%m/%d %H:%M:%S"),", Lat: ",str(gps_lat)," Lon: ",str(gps_lon)," Alt: ",str(gps_alt)
+print "DateTime:",gps_datetime.strftime("%Y/%m/%d %H:%M:%S"),"Lat: ",str(gps_lat),"Lon:",str(gps_lon),"Alt:",str(gps_alt)
 
 for i in xrange(200):
     hour=str(i).zfill(2)
