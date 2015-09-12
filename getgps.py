@@ -13,9 +13,17 @@ while i<1:
 		# To see all report data, uncomment the line below
 	print report
         if report['class'] == 'TPV':
+            if hasattr(report, 'lon'):
+                longitude=report.lon
             if hasattr(report, 'lat'):
                 latitude=report.lat
-		i=1
+            if hasattr(report, 'time'):
+                time=report.time
+            if hasattr(report, 'alt'):
+                alt=report.alt
+                i=1
+                print time,lat,lon,alt
+                
     except KeyError:
 		pass
     except KeyboardInterrupt:
