@@ -7,8 +7,17 @@ target=[1.0,1.0] #alt,az in radians
 
 rad2deg=180./3.14159
 
-hf.get_gps()
-hf.get_gps()
+print "Obtaining GPS data"
+j=0
+while j<1: 
+    gpstest=hf.get_gps()
+
+    if(gpstest[1] != "No Data"):
+        print "GPS sync sucessful"
+        j=1
+    else:
+        j=0
+
 
 
 
