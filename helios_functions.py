@@ -11,16 +11,19 @@ call(["sudo", "gpsd", "/dev/ttyAMA0","-F","/var/run/gpsd.sock"])
 READDATA = 2
 WRITE_DATA = 3
 
+ServoSpeed = 150 #100
+ServoDelay = 1 #1
+
 
 def resetdyn():
     
     #Reset Dynamixel 2
     
-    speed = 100
+    speed = ServoSpeed
     ID = 2
     SPEED_REG = 32
     POS_REG = 30
-    positions_delay = list([(512,2)])
+    positions_delay = list([(512,ServoDelay)])
     ax12 = dm.dynamixel()
     #test serial ports
     #print ax12.port.test_ports()
@@ -44,11 +47,11 @@ def resetdyn():
     
     #Reset Dynamixel 1
     
-    speed = 100
+    speed = ServoSpeed
     ID = 1
     SPEED_REG = 32
     POS_REG = 30
-    positions_delay = list([(512,2)])
+    positions_delay = list([(512,ServoDelay)])
     ax12 = dm.dynamixel()
     #test serial ports
     #print ax12.port.test_ports()
@@ -78,11 +81,11 @@ def movedyn(position_ID1, position_ID2):
     
         #Move Dynamixel 1
     
-        speed = 100
+        speed = ServoSpeed
         ID = 1
         SPEED_REG = 32
         POS_REG = 30
-        positions_delay = list([(position_ID1,2)])
+        positions_delay = list([(position_ID1,ServoDelay)])
         ax12 = dm.dynamixel()
         #test serial ports
         #print ax12.port.test_ports()
@@ -106,11 +109,11 @@ def movedyn(position_ID1, position_ID2):
     
         #Move Dynamixel 2
     
-        speed = 100
+        speed = ServoSpeed
         ID = 2
         SPEED_REG = 32
         POS_REG = 30
-        positions_delay = list([(position_ID2,2)])
+        positions_delay = list([(position_ID2,ServoDelay)])
         ax12 = dm.dynamixel()
         #test serial ports
         #print ax12.port.test_ports()
