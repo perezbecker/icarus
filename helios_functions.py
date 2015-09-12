@@ -135,14 +135,12 @@ def movedyn(position_ID1, position_ID2):
         print "Error: Position out of safety bounds"
 
 def alt_to_pos2(alt):
-    pos2 = -1*(int((alt + 60.)*1024./300.)-512)+512
+    pos2 = int((alt + 60.)*1024./300.)
     return pos2
 
 
-
-
 def az_to_pos1(az):
-    pos1 = int((az -30.)*1024./300.) 
+    pos1 = 512-1*(int((az -30.)*1024./300.)-512) 
     return pos1
 
 def get_gps():
