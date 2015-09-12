@@ -149,10 +149,10 @@ def get_gps():
     while i<1:
 
         try:
-        	report = session.next()
-    		# Wait for a 'TPV' report and display the current time
-    		# To see all report data, uncomment the line below
-    	#print report
+            report = session.next()
+            # Wait for a 'TPV' report and display the current time
+            # To see all report data, uncomment the line below
+            #print report
             if report['class'] == 'TPV':
                 if hasattr(report, 'lon'):
                     lon=report.lon
@@ -163,16 +163,15 @@ def get_gps():
                 if hasattr(report, 'alt'):
                     alt=report.alt
                     i=1
-                    
-
+            else:
+                pass
         except KeyError:
-    		pass
+            pass
         except KeyboardInterrupt:
-    		quit()
+            quit()
         except StopIteration:
-    		session = None
-    		print "GPSD has terminated"
-    
+            session = None
+            print "GPSD has terminated"
+
     return (time,lat,lon,alt)
-    
-    
+
