@@ -1,5 +1,7 @@
 import time
 import Dynamixel as dm
+import gps
+
 
 READDATA = 2
 WRITE_DATA = 3
@@ -137,4 +139,40 @@ def alt_to_pos2(alt):
 def az_to_pos1(az):
     pos1 = int((az -30.)*1024./300.) 
     return pos1
+
+def get_gps():
+    # Listen on port 2947 (gpsd) of localhost
+    session = gps.gps("localhost", "2947")
+    session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
+
+    i=0 
+    while i<1:
+
+        try:
+        	report = session.next()
+    		# Wait for a 'TPV' report and display the current time
+    		# To see all report data, uncomment the line below
+    	#print report
+            if report['class'] == 'TPV':
+                if hasattr(report, 'lon'):
+                    lon=report.lon
+                if hasattr(report, 'lat'):
+                    lat=report.lat
+                if hasattr(report, 'time'):
+                    time=report.time
+                if hasattr(report, 'alt'):
+                    alt=report.alt
+                    i=1
+                    
+
+        except KeyError:
+    		pass
+        except KeyboardInterrupt:
+    		quit()
+        except StopIteration:
+    		session = None
+    		print "GPSD has terminated"
+    
+    return (time,lat,lon,alt)
+    
     
