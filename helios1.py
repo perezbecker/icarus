@@ -27,7 +27,7 @@ for i in xrange(200):
 
 
     gatech = ephem.Observer()
-    gatech.date = '2015/09/12 01:33:00' #datetimeloc[0]+' '+time #'1984/5/30 16:22:56'
+    gatech.date = datetimeloc[0]+' '+time #'1984/5/30 16:22:56'
     gatech.lat = '37.77648' #datetimeloc[2]  #'33.775867'
     gatech.lon = '-122.41755' #datetimeloc[3] #'-84.39733'
 

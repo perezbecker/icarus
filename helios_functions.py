@@ -1,6 +1,11 @@
-import time
+import time as ti
 import Dynamixel as dm
 import gps
+from subprocess import call
+
+
+call(["sudo", "killall", "gpsd"])
+call(["sudo", "gpsd", "/dev/ttyAMA0","-F","/var/run/gpsd.sock"])
 
 
 READDATA = 2
@@ -15,7 +20,7 @@ def resetdyn():
     ID = 2
     SPEED_REG = 32
     POS_REG = 30
-    positions_delay = list([(512,1)])
+    positions_delay = list([(512,2)])
     ax12 = dm.dynamixel()
     #test serial ports
     #print ax12.port.test_ports()
@@ -32,7 +37,7 @@ def resetdyn():
             #print"data send recieve test passed"  
         for pos, delay in positions_delay:
             ax12.set_ax_reg(ID, POS_REG, ([(pos%256),(pos>>8)]))
-            time.sleep(delay)
+            ti.sleep(delay)
     #else:
         #print "error setting and getting ax data"
     #print "test complete"
@@ -43,7 +48,7 @@ def resetdyn():
     ID = 1
     SPEED_REG = 32
     POS_REG = 30
-    positions_delay = list([(512,1)])
+    positions_delay = list([(512,2)])
     ax12 = dm.dynamixel()
     #test serial ports
     #print ax12.port.test_ports()
@@ -60,7 +65,7 @@ def resetdyn():
             #print"data send recieve test passed"  
         for pos, delay in positions_delay:
             ax12.set_ax_reg(ID, POS_REG, ([(pos%256),(pos>>8)]))
-            time.sleep(delay)
+            ti.sleep(delay)
     #else:
         #print "error setting and getting ax data"
     #print "test complete"
@@ -77,7 +82,7 @@ def movedyn(position_ID1, position_ID2):
         ID = 1
         SPEED_REG = 32
         POS_REG = 30
-        positions_delay = list([(position_ID1,1)])
+        positions_delay = list([(position_ID1,2)])
         ax12 = dm.dynamixel()
         #test serial ports
         #print ax12.port.test_ports()
@@ -94,7 +99,7 @@ def movedyn(position_ID1, position_ID2):
                 #print"data send recieve test passed"  
             for pos, delay in positions_delay:
                 ax12.set_ax_reg(ID, POS_REG, ([(pos%256),(pos>>8)]))
-                time.sleep(delay)
+                ti.sleep(delay)
         #else:
             #print "error setting and getting ax data"
         #print "test complete"
@@ -105,7 +110,7 @@ def movedyn(position_ID1, position_ID2):
         ID = 2
         SPEED_REG = 32
         POS_REG = 30
-        positions_delay = list([(position_ID2,1)])
+        positions_delay = list([(position_ID2,2)])
         ax12 = dm.dynamixel()
         #test serial ports
         #print ax12.port.test_ports()
@@ -122,7 +127,7 @@ def movedyn(position_ID1, position_ID2):
                 #print"data send recieve test passed"  
             for pos, delay in positions_delay:
                 ax12.set_ax_reg(ID, POS_REG, ([(pos%256),(pos>>8)]))
-                time.sleep(delay)
+                ti.sleep(delay)
         #else:
             #print "error setting and getting ax data"
         #print "test complete"
@@ -159,7 +164,7 @@ def get_gps():
                 if hasattr(report, 'lat'):
                     lat=report.lat
                 if hasattr(report, 'time'):
-                    time=report.time
+                    datetime=report.time
                 if hasattr(report, 'alt'):
                     alt=report.alt
                     i=1
@@ -173,5 +178,4 @@ def get_gps():
             session = None
             print "GPSD has terminated"
 
-    return (time,lat,lon,alt)
-
+    return (datetime,lat,lon,alt)
