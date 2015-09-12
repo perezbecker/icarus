@@ -1,25 +1,39 @@
 import ephem
 import helios_functions as hf 
 import time as t
+import datetime
 
 target=[1.0,1.0] #alt,az in radians
 
 rad2deg=180./3.14159
 
-
-f = open('DateTimeLoc.txt', 'r')
-datetimeloc=f.readline().rstrip('\n').split(',')
-# 0-date; 1-time; 2-lat; 3-lon; 4-elevation, 5-temp
-f.close()
-
-print "Date:", datetimeloc[0]
-print "Time:", datetimeloc[1]
-print "Lat:", datetimeloc[2]
-print "Lon:", datetimeloc[3]
-print "Ele:", datetimeloc[4]
-print "Temp:", datetimeloc[5]
+hf.get_gps()
+hf.get_gps()
 
 
+
+# GET DateTimeLoc FROM FILE
+# f = open('DateTimeLoc.txt', 'r')
+# datetimeloc=f.readline().rstrip('\n').split(',')
+# # 0-date; 1-time; 2-lat; 3-lon; 4-elevation, 5-temp
+# f.close()
+# 
+# print "Date:", datetimeloc[0]
+# print "Time:", datetimeloc[1]
+# print "Lat:", datetimeloc[2]
+# print "Lon:", datetimeloc[3]
+# print "Ele:", datetimeloc[4]
+# print "Temp:", datetimeloc[5]
+
+#GET DateTimeLoc FROM GPS
+datetimeloc=hf.get_gps()
+
+gps_datetime=datetime.datetime.strptime(str(datetimeloc[0]), "%Y-%m-%dT%H:%M:%S.%fZ")
+gps_lat=datetimeloc[1]
+gps_lon=datetimeloc[2]
+gps_alt=datetimeloc[3]
+
+print "DateTime: ",gps_datetime.strftime("%Y/%m/%d %H:%M:%S"),", Lat: ",str(gps_lat)," Lon: ",str(gps_lon)," Alt: ",str(gps_alt)
 
 for i in xrange(200):
     hour=str(i).zfill(2)
@@ -27,12 +41,12 @@ for i in xrange(200):
 
 
     gatech = ephem.Observer()
-    gatech.date = datetimeloc[0]+' '+time #'1984/5/30 16:22:56'
-    gatech.lat = '37.77648' #datetimeloc[2]  #'33.775867'
-    gatech.lon = '-122.41755' #datetimeloc[3] #'-84.39733'
+    gatech.date = gps_datetime.strftime("%Y/%m/%d %H:%M:%S") #datetimeloc[0]+' '+time #'1984/5/30 16:22:56'
+    gatech.lat =  str(gps_lat) #'37.77648' #datetimeloc[2]  #'33.775867'
+    gatech.lon =  str(gps_lon) #'-122.41755' #datetimeloc[3] #'-84.39733'
 
-    gatech.elevation = int(datetimeloc[4])
-    gatech.temp = float(datetimeloc[5])
+    gatech.elevation = gps_alt
+    gatech.temp = 23.0 #float(datetimeloc[5])
 
     sol_obj = ephem.Sun(gatech)
     sol=[sol_obj.alt, sol_obj.az]
