@@ -1,0 +1,10 @@
+Garage Measurements:
+
+PVC plates for Ledbus
+2 Panel: 10cm x 19.25cm
+1 Panel: 10cm x 38.5cm ( or 3in 15/16in x 15in 3/16in == 3.93701 inches x 15.15748 inches) 10.2cm -> 4.015748 inches
+
+Laser Diameter: 1.2cm
+Laser Lentght: 5.5cm (3.5cm6 metal)
+
+Buy M3 DIN965 screws.

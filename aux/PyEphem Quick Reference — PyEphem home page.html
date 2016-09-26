@@ -1,0 +1,1164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0035)http://rhodesmill.org/pyephem/quick -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+    <title>PyEphem Quick Reference — PyEphem home page</title>
+    
+    <link rel="stylesheet" href="./PyEphem Quick Reference — PyEphem home page_files/pyephem.css" type="text/css">
+    <link rel="stylesheet" href="./PyEphem Quick Reference — PyEphem home page_files/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3.7.6.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="./PyEphem Quick Reference — PyEphem home page_files/jquery.js"></script>
+    <script type="text/javascript" src="./PyEphem Quick Reference — PyEphem home page_files/underscore.js"></script>
+    <script type="text/javascript" src="./PyEphem Quick Reference — PyEphem home page_files/doctools.js"></script>
+    <link rel="top" title="PyEphem home page" href="http://rhodesmill.org/pyephem/index.html">
+    <link rel="next" title="The PyEphem Tutorial" href="http://rhodesmill.org/pyephem/tutorial.html">
+    <link rel="prev" title="Welcome!" href="http://rhodesmill.org/pyephem/index.html"> 
+  </head>
+  <body>
+    <img class="alone-logo" src="./PyEphem Quick Reference — PyEphem home page_files/pyephem-logo-full.png">
+    
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="http://rhodesmill.org/pyephem/genindex.html" title="General Index" accesskey="I">index</a></li>
+        <li class="right">
+          <a href="http://rhodesmill.org/pyephem/tutorial.html" title="The PyEphem Tutorial" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="http://rhodesmill.org/pyephem/index.html" title="Welcome!" accesskey="P">previous</a> |</li>
+        <li><a href="http://rhodesmill.org/pyephem/index.html">PyEphem home page</a> »</li> 
+      </ul>
+    </div>
+
+    
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3>Page Contents</h3>
+<ul>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#">PyEphem Quick Reference</a><ul>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#bodies">Bodies</a><ul>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#body-compute-date">body.compute(date)</a></li>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#body-compute-observer">body.compute(observer)</a></li>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#catalog-format">catalog format</a></li>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#bodies-with-orbital-elements">bodies with orbital elements</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#other-functions">Other Functions</a></li>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#coordinate-conversion">Coordinate Conversion</a></li>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#observers">Observers</a><ul>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#transit-rising-setting">transit, rising, setting</a></li>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#observer-horizon">observer.horizon</a></li>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#other-observer-methods">other Observer methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#equinoxes-solstices">Equinoxes &amp; Solstices</a></li>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#phases-of-the-moon">Phases of the Moon</a></li>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#angles">Angles</a></li>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#dates">Dates</a><ul>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#local-time">local time</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#stars-and-cities">Stars and Cities</a></li>
+<li><a class="reference internal" href="http://rhodesmill.org/pyephem/quick#other-constants">Other Constants</a></li>
+</ul>
+</li>
+</ul>
+
+<b>Previous Page</b><br>
+<a href="http://rhodesmill.org/pyephem/index.html" title="previous chapter">Welcome!</a>
+<br><br><b>Next Page</b><br>
+<a href="http://rhodesmill.org/pyephem/tutorial.html" title="next chapter">The PyEphem Tutorial</a>
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pyephem-quick-reference">
+<h1>PyEphem Quick Reference<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#pyephem-quick-reference" title="Permalink to this headline">¶</a></h1>
+<p>Those experienced with both Python and astronomy
+should be able to start using PyEphem
+using only the notes and examples shown below!
+There are two ways to begin using PyEphem in a Python program.
+One is to import the module by name,
+and then to prefix everything you want to use from the module
+with the qualifier <tt class="docutils literal"><span class="pre">ephem</span></tt>;
+this is the way the code snippets below are written,
+which hopefully makes it clear
+which variables are coming from PyEphem itself
+and which are being created in the course of each example.</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; import ephem
+&gt;&gt;&gt; m = ephem.Mars('1970')
+&gt;&gt;&gt; print(ephem.constellation(m))
+('Aqr', 'Aquarius')</pre>
+</div>
+<p>But to avoid typing the module name over and over again,
+you can tell Python to import everything from the module
+right into your namespace,
+where you can then use them without further qualification:</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; from ephem import *
+&gt;&gt;&gt; m = Mars('1970')
+&gt;&gt;&gt; print(constellation(m))
+('Aqr', 'Aquarius')</pre>
+</div>
+<p>To understand each of the following examples,
+first read the source code snippet carefully,
+and only then dive into the explanations beneath it.</p>
+<div class="section" id="bodies">
+<h2>Bodies<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#bodies" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; m = ephem.Mars()
+&gt;&gt;&gt; m.name
+'Mars'
+&gt;&gt;&gt; a = ephem.star('Arcturus')
+&gt;&gt;&gt; a.name
+'Arcturus'</pre>
+</div>
+<ul class="simple">
+<li>The Sun, Moon, planets, and major planet moons each have their own class.</li>
+<li>PyEphem includes a modest catalog of famous bright stars.</li>
+<li>Body instances know their <tt class="docutils literal"><span class="pre">name</span></tt>
+(which you can set to whatever you want).</li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; m = ephem.Mars('2003/8/27')
+&gt;&gt;&gt; print('%s %s %.10f' % (m.name, m.elong, m.size))
+Mars -173:00:34.2 25.1121063232</pre>
+</div>
+<ul class="simple">
+<li>Extra arguments when you create a Body
+are used to perform an initial <tt class="docutils literal"><span class="pre">compute()</span></tt>
+(see the next section).</li>
+</ul>
+</div></blockquote>
+<div class="section" id="body-compute-date">
+<h3>body.compute(date)<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#body-compute-date" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; j = ephem.Jupiter()
+&gt;&gt;&gt; j.compute('1986/2/8')
+&gt;&gt;&gt; print('%s %s' % (j.ra, j.dec))
+21:57:50.46 -13:17:37.2
+&gt;&gt;&gt; j.compute('1986/2/9', epoch='1950')
+&gt;&gt;&gt; print('%s %s' % (j.a_ra, j.a_dec))
+21:56:50.83 -13:22:54.3</pre>
+</div>
+<ul>
+<li><p class="first">Computes the position of the <tt class="docutils literal"><span class="pre">body</span></tt>.</p>
+</li>
+<li><p class="first">The date if omitted defaults to <tt class="docutils literal"><span class="pre">now()</span></tt>.</p>
+</li>
+<li><p class="first">The epoch if omitted defaults to <tt class="docutils literal"><span class="pre">'2000'</span></tt>.</p>
+</li>
+<li><p class="first">Date and epoch arguments can be anything acceptable to <tt class="docutils literal"><span class="pre">Date()</span></tt>.</p>
+</li>
+<li><p class="first">Sets the following <tt class="docutils literal"><span class="pre">body</span></tt> attributes:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">a_ra</span></tt> — <a class="reference external" href="http://rhodesmill.org/pyephem/radec">Astrometric geocentric</a> right ascension for the <tt class="docutils literal"><span class="pre">epoch</span></tt> specified</div>
+<div class="line"><tt class="docutils literal"><span class="pre">a_dec</span></tt> — <a class="reference external" href="http://rhodesmill.org/pyephem/radec">Astrometric geocentric</a> declination for the <tt class="docutils literal"><span class="pre">epoch</span></tt> specified</div>
+</div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">g_ra</span></tt> and <tt class="docutils literal"><span class="pre">ra</span></tt> — <a class="reference external" href="http://rhodesmill.org/pyephem/radec">Apparent geocentric</a> right ascension for the epoch-of-date</div>
+<div class="line"><tt class="docutils literal"><span class="pre">g_dec</span></tt> and <tt class="docutils literal"><span class="pre">dec</span></tt> — <a class="reference external" href="http://rhodesmill.org/pyephem/radec">Apparent geocentric</a> declination for the epoch-of-date</div>
+</div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">elong</span></tt> — Elongation (angle to sun)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">mag</span></tt> — Magnitude</div>
+<div class="line"><tt class="docutils literal"><span class="pre">size</span></tt> — Size (diameter in arcseconds)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">radius</span></tt> — Size (radius as an angle)</div>
+</div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">circumpolar</span></tt> — whether it stays above the horizon</div>
+<div class="line"><tt class="docutils literal"><span class="pre">neverup</span></tt> — whether is stays below the horizon</div>
+</div>
+</li>
+<li><p class="first">On Solar System bodies, also sets:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">hlon</span></tt> — Heliocentric longitude (see next paragraph)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">hlat</span></tt> — Heliocentric latitude (see next paragraph)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">sun_distance</span></tt> — Distance to Sun&nbsp;(AU)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">earth_distance</span></tt> — Distance to Earth&nbsp;(AU)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">phase</span></tt> — Percent of surface illuminated</div>
+</div>
+<p>Both <tt class="docutils literal"><span class="pre">hlon</span></tt> and <tt class="docutils literal"><span class="pre">hlat</span></tt> have a special meaning
+for the Sun and Moon.
+For a <tt class="docutils literal"><span class="pre">Sun</span></tt> body,
+they give the <em>Earth’s</em> heliocentric longitude and latitude.
+For a <tt class="docutils literal"><span class="pre">Moon</span></tt> body,
+they give the Moon’s <em>geocentric</em> longitude and latitude.</p>
+</li>
+<li><p class="first">On planetary moons, also sets:</p>
+<div class="line-block">
+<div class="line">Position of moon relative to planet</div>
+<div class="line">(measured in planet radii)</div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">x</span></tt> — offset +east or –west</div>
+<div class="line"><tt class="docutils literal"><span class="pre">y</span></tt> — offset +south or –north</div>
+<div class="line"><tt class="docutils literal"><span class="pre">z</span></tt> — offset +front or –behind</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">Whether the moon is visible...</div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">earth_visible</span></tt> — from the Earth</div>
+<div class="line"><tt class="docutils literal"><span class="pre">sun_visible</span></tt> — from the Sun</div>
+</div>
+</div>
+</li>
+<li><p class="first">On artificial satellites, also sets:</p>
+<div class="line-block">
+<div class="line">Geographic point beneath satellite:</div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">sublat</span></tt> — Latitude&nbsp;(+N)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">sublong</span></tt> — Longitude&nbsp;(+E)</div>
+<div class="line"><br></div>
+</div>
+<div class="line"><tt class="docutils literal"><span class="pre">elevation</span></tt> — Height above sea level&nbsp;(m)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">range</span></tt> — Distance from observer to satellite&nbsp;(m)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">range_velocity</span></tt> — Range rate of change&nbsp;(m/s)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">eclipsed</span></tt> — Whether satellite is in Earth’s shadow</div>
+</div>
+</li>
+<li><p class="first">On <tt class="docutils literal"><span class="pre">Moon</span></tt> bodies, also sets:</p>
+<div class="line-block">
+<div class="line">Current libration:</div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">libration_lat</span></tt> — in Latitude</div>
+<div class="line"><tt class="docutils literal"><span class="pre">libration_long</span></tt> — in Longitude</div>
+<div class="line"><br></div>
+</div>
+<div class="line"><tt class="docutils literal"><span class="pre">colong</span></tt> — Selenographic colongiude</div>
+<div class="line"><tt class="docutils literal"><span class="pre">moon_phase</span></tt> — Percent of surface illuminated</div>
+<div class="line"><tt class="docutils literal"><span class="pre">subsolar_lat</span></tt> — Lunar latitude that the Sun is standing above</div>
+</div>
+</li>
+<li><p class="first">On <tt class="docutils literal"><span class="pre">Jupiter</span></tt> bodies,
+also determines the longitude of the central meridian facing Earth,
+both in System&nbsp;I (which measures rotation at the Jovial equator)
+and System&nbsp;II (which measures rotation at temperate latitudes).</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">cmlI</span></tt> — Central meridian longitude in System&nbsp;I</div>
+<div class="line"><tt class="docutils literal"><span class="pre">cmlII</span></tt> — Central meridian longitude in System&nbsp;II</div>
+</div>
+</li>
+<li><p class="first">On <tt class="docutils literal"><span class="pre">Saturn</span></tt> bodies,
+also sets the tilt of the rings,
+with southward tilt being positive, and northward, negative:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">earth_tilt</span></tt> — Tilt towards Earth</div>
+<div class="line"><tt class="docutils literal"><span class="pre">sun_tilt</span></tt> — Tilt towards Sun</div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="body-compute-observer">
+<h3>body.compute(observer)<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#body-compute-observer" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; gatech = ephem.Observer()
+&gt;&gt;&gt; gatech.lon = '-84.39733'
+&gt;&gt;&gt; gatech.lat = '33.775867'
+&gt;&gt;&gt; gatech.elevation = 320
+&gt;&gt;&gt; gatech.date = '1984/5/30 16:22:56'
+&gt;&gt;&gt; v = ephem.Venus(gatech)
+&gt;&gt;&gt; print('%s %s' % (v.alt, v.az))
+72:19:44.8 134:14:25.3</pre>
+</div>
+<ul>
+<li><p class="first">Computes the position of the <tt class="docutils literal"><span class="pre">Body</span></tt>.</p>
+</li>
+<li><p class="first">Uses the <tt class="docutils literal"><span class="pre">date</span></tt> of the observer.</p>
+</li>
+<li><p class="first">Uses the <tt class="docutils literal"><span class="pre">epoch</span></tt> of the observer.</p>
+</li>
+<li><p class="first">Sets all of the <tt class="docutils literal"><span class="pre">Body</span></tt> attributes listed in the previous section
+(but <tt class="docutils literal"><span class="pre">ra</span></tt> and <tt class="docutils literal"><span class="pre">dec</span></tt> will get different values;
+see below).</p>
+</li>
+<li><p class="first">Also computes where the body appears in the sky
+(or below the horizon) for the observer,
+and sets four more <tt class="docutils literal"><span class="pre">Body</span></tt> attributes:</p>
+<div class="line-block">
+<div class="line"><a class="reference external" href="http://rhodesmill.org/pyephem/radec">Apparent topocentric position</a></div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">ra</span></tt> — Right ascension</div>
+<div class="line"><tt class="docutils literal"><span class="pre">dec</span></tt> — Declination</div>
+<div class="line"><br></div>
+</div>
+<div class="line"><a class="reference external" href="http://rhodesmill.org/pyephem/radec">Apparent position</a> relative to horizon</div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">az</span></tt> — Azimuth east of north</div>
+<div class="line"><tt class="docutils literal"><span class="pre">alt</span></tt> — Altitude above horizon</div>
+</div>
+</div>
+</li>
+<li><p class="first">These apparent positions
+include an adjustment to simulate atmospheric refraction
+for the observer’s <tt class="docutils literal"><span class="pre">temp</span></tt> and <tt class="docutils literal"><span class="pre">presure</span></tt>;
+set the observer’s <tt class="docutils literal"><span class="pre">pressure</span></tt> to zero to ignore refraction.</p>
+</li>
+<li><p class="first">For earth satellite objects,
+the astrometric coordinates <tt class="docutils literal"><span class="pre">a_ra</span></tt> and <tt class="docutils literal"><span class="pre">a_dec</span></tt> are topocentric
+instead of geocentric,
+since there is little point in figuring out where the satellite
+would appear on a J2000 (or whatever epoch you are using) star chart
+for an observer sitting at the center of the earth.</p>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="catalog-format">
+<h3>catalog format<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#catalog-format" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; line = "C/2002 Y1 (Juels-Holvorcem),e,103.7816,166.2194,128.8232,242.5695,0.0002609,0.99705756,0.0000,04/13.2508/2003,2000,g  6.5,4.0"
+&gt;&gt;&gt; yh = ephem.readdb(line)
+&gt;&gt;&gt; yh.compute('2007/10/1')
+&gt;&gt;&gt; print('%.10f' % yh.earth_distance)
+14.8046731949
+&gt;&gt;&gt; print(yh.mag)
+23.96</pre>
+</div>
+<ul>
+<li><p class="first">Bodies can be imported and exported
+in the popular <a class="reference external" href="http://www.clearskyinstitute.com/xephem/help/xephem.html#mozTocId468501">XEphem format</a>.</p>
+</li>
+<li><p class="first">When you deal with asteroids and comets,
+whose orbital parameters are subject to frequent revision,
+you will usually find yourself downloading an XEphem file
+and reading its contents.</p>
+</li>
+<li><p class="first">To interpret a line in XEphem format,
+call the <tt class="docutils literal"><span class="pre">readdb()</span></tt> function:</p>
+<div class="highlight-python"><pre>halley = ephem.readdb(line)</pre>
+</div>
+</li>
+<li><p class="first">To export a body in XEphem format,
+call the <tt class="docutils literal"><span class="pre">writedb()</span></tt> method of the body itself:</p>
+<div class="highlight-python"><pre>print(halley.writedb())</pre>
+</div>
+</li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; line1 = "ISS (ZARYA)"
+&gt;&gt;&gt; line2 = "1 25544U 98067A   03097.78853147  .00021906  00000-0  28403-3 0  8652"
+&gt;&gt;&gt; line3 = "2 25544  51.6361  13.7980 0004256  35.6671  59.2566 15.58778559250029"
+&gt;&gt;&gt; iss = ephem.readtle(line1, line2, line3)
+&gt;&gt;&gt; iss.compute('2003/3/23')
+&gt;&gt;&gt; print('%s %s' % (iss.sublong, iss.sublat))
+-76:24:18.3 13:05:31.1</pre>
+</div>
+<ul class="simple">
+<li>Satellite elements often come packaged in a format called TLE,
+that has the satellite name on one line
+and the elements on the following two lines.</li>
+<li>Call the <tt class="docutils literal"><span class="pre">readtle()</span></tt> function to turn a TLE entry
+into a PyEphem <tt class="docutils literal"><span class="pre">Body</span></tt>.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="bodies-with-orbital-elements">
+<h3>bodies with orbital elements<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#bodies-with-orbital-elements" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul>
+<li><p class="first">When you load minor objects like comets and asteroids,
+the resulting object specifies the <em>orbital elements</em>
+that allow XEphem to predict its position.</p>
+</li>
+<li><p class="first">These orbital elements are available for you to inspect and change.</p>
+</li>
+<li><p class="first">If you lack a catalog from which to load an object,
+you can start by creating a raw body of one of the following types
+and filling in its elements.</p>
+</li>
+<li><p class="first">Element attribute names start with underscores
+to distinguish them from the normal <tt class="docutils literal"><span class="pre">Body</span></tt> attributes
+that are set as the result of calling <tt class="docutils literal"><span class="pre">compute()</span></tt>.</p>
+</li>
+<li><p class="first">Each <tt class="docutils literal"><span class="pre">FixedBody</span></tt> has only three necessary elements:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">_ra</span></tt>, <tt class="docutils literal"><span class="pre">_dec</span></tt> — Position</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_epoch</span></tt> — The epoch of the position</div>
+</div>
+<p>The other <tt class="docutils literal"><span class="pre">FixedBody</span></tt> elements store trivia about its appearance:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">_class</span></tt> — One-character string classification</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_spect</span></tt> — Two-character string for the spectral code</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_ratio</span></tt> — Ratio between the major and minor diameters</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_pa</span></tt> — the angle at which the major axis lies in the sky,
+measured east of north&nbsp;(°)</div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">EllipticalBody</span></tt> elements:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">_inc</span></tt> — Inclination&nbsp;(°)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_Om</span></tt> — Longitude of ascending node&nbsp;(°)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_om</span></tt> — Argument of perihelion&nbsp;(°)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_a</span></tt> — Mean distance from sun&nbsp;(AU)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_M</span></tt> — Mean anomaly from the perihelion&nbsp;(°)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_epoch_M</span></tt> — Date for measurement <tt class="docutils literal"><span class="pre">_M</span></tt></div>
+<div class="line"><tt class="docutils literal"><span class="pre">_size</span></tt> — Angular size (arcseconds at&nbsp;1&nbsp;AU)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_e</span></tt> — Eccentricity</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_epoch</span></tt> — Epoch for <tt class="docutils literal"><span class="pre">_inc</span></tt>, <tt class="docutils literal"><span class="pre">_Om</span></tt>, and <tt class="docutils literal"><span class="pre">_om</span></tt></div>
+<div class="line"><tt class="docutils literal"><span class="pre">_H</span></tt>, <tt class="docutils literal"><span class="pre">_G</span></tt> — Parameters for the H/G magnitude model</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_g</span></tt>, <tt class="docutils literal"><span class="pre">_k</span></tt> — Parameters for the g/k magnitude model</div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">HyperbolicBody</span></tt> elements:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">_epoch</span></tt> — Equinox year for <tt class="docutils literal"><span class="pre">_inc</span></tt>, <tt class="docutils literal"><span class="pre">_Om</span></tt>, and <tt class="docutils literal"><span class="pre">_om</span></tt></div>
+<div class="line"><tt class="docutils literal"><span class="pre">_epoch_p</span></tt> — Epoch of perihelion</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_inc</span></tt> — Inclination&nbsp;(°)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_Om</span></tt> — Longitude of ascending node&nbsp;(°)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_om</span></tt> — Argument of perihelion&nbsp;(°)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_e</span></tt> — Eccentricity</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_q</span></tt> — Perihelion distance&nbsp;(AU)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_g</span></tt>, <tt class="docutils literal"><span class="pre">_k</span></tt> — Magnitude model coefficients</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_size</span></tt> — Angular size in arcseconds at&nbsp;1&nbsp;AU</div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">ParabolicBody</span></tt> elements:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">_epoch</span></tt> — Epoch for <tt class="docutils literal"><span class="pre">_inc</span></tt>, <tt class="docutils literal"><span class="pre">_Om</span></tt>, and <tt class="docutils literal"><span class="pre">_om</span></tt></div>
+<div class="line"><tt class="docutils literal"><span class="pre">_epoch_p</span></tt> — Epoch of perihelion</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_inc</span></tt> — Inclination&nbsp;(°)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_Om</span></tt> — Longitude of ascending node&nbsp;(°)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_om</span></tt> — Argument of perihelion&nbsp;(°)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_q</span></tt> — Perihelion distance&nbsp;(AU)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_g</span></tt>, <tt class="docutils literal"><span class="pre">_k</span></tt> — Magnitude model coefficients</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_size</span></tt> — Angular size in arcseconds at&nbsp;1&nbsp;AU</div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">EarthSatellite</span></tt> elements:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">_epoch</span></tt> — Reference epoch</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_n</span></tt> — Mean motion, in revolutions per day</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_inc</span></tt> — Inclination&nbsp;(°)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_raan</span></tt> — Right Ascension of ascending node&nbsp;(°)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_e</span></tt> — Eccentricity</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_ap</span></tt> — Argument of perigee at epoch&nbsp;(°)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_M</span></tt> — Mean anomaly from perigee at epoch&nbsp;(°)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_decay</span></tt> — Orbit decay rate in revolutions per day, per day</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_drag</span></tt> — Object drag coefficient in per earth radii</div>
+<div class="line"><tt class="docutils literal"><span class="pre">_orbit</span></tt> — Integer orbit number of epoch</div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<hr class="docutils">
+<div class="section" id="other-functions">
+<h2>Other Functions<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#other-functions" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; m = ephem.Moon('1980/6/1')
+&gt;&gt;&gt; print(ephem.constellation(m))
+('Sgr', 'Sagittarius')</pre>
+</div>
+<ul class="simple">
+<li>The <tt class="docutils literal"><span class="pre">constellation()</span></tt> function returns a tuple
+containing the abbreviated name and full name
+of the constellation in which its argument lies.</li>
+<li>You can either pass a <tt class="docutils literal"><span class="pre">Body</span></tt> whose position is computed,
+or a tuple <tt class="docutils literal"><span class="pre">(ra,</span> <span class="pre">dec)</span></tt> of coordinates&nbsp;—
+in which case epoch 2000 is assumed
+unless you also pass an <tt class="docutils literal"><span class="pre">epoch=</span></tt> keyword argument
+specifying another value.</li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; print(ephem.delta_t('1980'))
+50.54</pre>
+</div>
+<ul class="simple">
+<li>The <tt class="docutils literal"><span class="pre">delta_t()</span></tt> function
+returns the difference, in seconds, on the given date
+between Terrestrial Time and Universal Time.</li>
+<li>Takes a <tt class="docutils literal"><span class="pre">Date</span></tt> or <tt class="docutils literal"><span class="pre">Observer</span></tt> argument.</li>
+<li>Without an argument, uses <tt class="docutils literal"><span class="pre">now()</span></tt>.</li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; ephem.julian_date('2000/1/1')
+2451544.5</pre>
+</div>
+<ul class="simple">
+<li>The <tt class="docutils literal"><span class="pre">julian_date()</span></tt> function
+returns the official Julian Date of the given day and time.</li>
+<li>Takes a <tt class="docutils literal"><span class="pre">Date</span></tt> or <tt class="docutils literal"><span class="pre">Observer</span></tt> argument.</li>
+<li>Without an argument, uses <tt class="docutils literal"><span class="pre">now()</span></tt>.</li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; ra, dec = '7:16:00', '-6:17:00'
+&gt;&gt;&gt; print(ephem.uranometria(ra, dec))
+V2 - P274
+&gt;&gt;&gt; print(ephem.uranometria2000(ra, dec))
+V2 - P135
+&gt;&gt;&gt; print(ephem.millennium_atlas(ra, dec))
+V1 - P273</pre>
+</div>
+<ul>
+<li><p class="first">Take an <tt class="docutils literal"><span class="pre">ra</span></tt> and <tt class="docutils literal"><span class="pre">dec</span></tt> as arguments.</p>
+</li>
+<li><p class="first">Return the volume and page on which that coordinate lies
+in the given star atlas:</p>
+<div class="line-block">
+<div class="line"><em>Uranometria</em> by Johannes Bayer.</div>
+<div class="line"><em>Uranometria 2000.0</em> edited by Wil Tirion.</div>
+<div class="line"><em>Millennium Star Atlas</em> by Roger W. Sinnott and Michael A. C. Perryman.</div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; m1 = ephem.Moon('1970/1/16')
+&gt;&gt;&gt; m2 = ephem.Moon('1970/1/17')
+&gt;&gt;&gt; s = ephem.separation(m1, m2)
+&gt;&gt;&gt; print("In one day the Moon moved %s" % s)
+In one day the Moon moved 12:33:28.5</pre>
+</div>
+<ul class="simple">
+<li>The <tt class="docutils literal"><span class="pre">separation()</span></tt> function
+returns the angle that separates two positions on a sphere.</li>
+<li>Each argument can be either a <tt class="docutils literal"><span class="pre">Body</span></tt>,
+in which case its <tt class="docutils literal"><span class="pre">ra</span></tt> and <tt class="docutils literal"><span class="pre">dec</span></tt> are used,
+or a tuple <tt class="docutils literal"><span class="pre">(lon,</span> <span class="pre">lat)</span></tt> giving a pair of spherical coordinates
+where <tt class="docutils literal"><span class="pre">lon</span></tt> measures angle around the sphere’s equator
+and <tt class="docutils literal"><span class="pre">lat</span></tt> measures the angle above or below its equator.</li>
+</ul>
+</div></blockquote>
+</div>
+<hr class="docutils">
+<div class="section" id="coordinate-conversion">
+<h2>Coordinate Conversion<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#coordinate-conversion" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; np = Equatorial('0', '90', epoch='2000')
+&gt;&gt;&gt; g = Galactic(np)
+&gt;&gt;&gt; print('%s %s' % (g.lon, g.lat))
+122:55:54.9 27:07:41.7</pre>
+</div>
+<ul>
+<li><p class="first">There are three coordinate classes,
+which each have three properties:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">Equatorial</span></tt></div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">ra</span></tt> — right ascension</div>
+<div class="line"><tt class="docutils literal"><span class="pre">dec</span></tt> — declination</div>
+<div class="line"><tt class="docutils literal"><span class="pre">epoch</span></tt> — epoch of the coordinate</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">Ecliptic</span></tt></div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">lon</span></tt> — ecliptic longitude&nbsp;(+E)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">lat</span></tt> — ecliptic latitude&nbsp;(+N)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">epoch</span></tt> — epoch of the coordinate</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">Galactic</span></tt></div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">lon</span></tt> — galactic longitude&nbsp;(+E)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">lat</span></tt> — galactic latitude&nbsp;(+N)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">epoch</span></tt> — epoch of the coordinate</div>
+</div>
+</div>
+</li>
+<li><p class="first">When creating a new coordinate,
+you can pass either a body,
+or another coordinate,
+or a pair of raw angles
+(always place the longitude or right ascension first).</p>
+</li>
+<li><p class="first">When creating a coordinate,
+you can optionally pass an <tt class="docutils literal"><span class="pre">epoch=</span></tt> keyword
+specifying the epoch for the coordinate system.
+Otherwise the epoch is copied
+from the body or other coordinate being used,
+or J2000 is used as the default.</p>
+</li>
+<li><p class="first">See the <a class="reference external" href="http://rhodesmill.org/pyephem/coordinates">Coordinate Transformations</a> document for more details.</p>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="observers">
+<h2>Observers<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#observers" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; lowell = ephem.Observer()
+&gt;&gt;&gt; lowell.lon = '-111:32.1'
+&gt;&gt;&gt; lowell.lat = '35:05.8'
+&gt;&gt;&gt; lowell.elevation = 2198
+&gt;&gt;&gt; lowell.date = '1986/3/13'
+&gt;&gt;&gt; j = ephem.Jupiter()
+&gt;&gt;&gt; j.compute(lowell)
+&gt;&gt;&gt; print(j.circumpolar)
+False
+&gt;&gt;&gt; print(j.neverup)
+False
+&gt;&gt;&gt; print('%s %s' % (j.alt, j.az))
+0:57:44.7 256:41:01.3</pre>
+</div>
+<ul>
+<li><p class="first">Describes a position on Earth’s surface.</p>
+</li>
+<li><p class="first">Pass to the <tt class="docutils literal"><span class="pre">compute()</span></tt> method of a <tt class="docutils literal"><span class="pre">Body</span></tt>.</p>
+</li>
+<li><p class="first">These are the attributes you can set:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">date</span></tt> — Date and time</div>
+<div class="line"><tt class="docutils literal"><span class="pre">epoch</span></tt> — Epoch for astrometric RA/dec</div>
+</div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">lat</span></tt> — Latitude&nbsp;(+N)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">lon</span></tt> — Longitude&nbsp;(+E)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">elevation</span></tt> — Elevation&nbsp;(m)</div>
+</div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">temp</span></tt> — Temperature&nbsp;(°C)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">pressure</span></tt> — Atmospheric pressure&nbsp;(mBar)</div>
+</div>
+</li>
+<li><p class="first">The <tt class="docutils literal"><span class="pre">date</span></tt> defaults to <tt class="docutils literal"><span class="pre">now()</span></tt>.</p>
+</li>
+<li><p class="first">The <tt class="docutils literal"><span class="pre">epoch</span></tt> defaults to <tt class="docutils literal"><span class="pre">'2000'</span></tt>.</p>
+</li>
+<li><p class="first">The <tt class="docutils literal"><span class="pre">temp</span></tt> defaults to 25°C.</p>
+</li>
+<li><p class="first">The <tt class="docutils literal"><span class="pre">pressure</span></tt> defaults to 1010mBar.</p>
+</li>
+<li><p class="first">Other attributes default to zero.</p>
+</li>
+</ul>
+<div class="highlight-python"><pre>&gt;&gt;&gt; lowell.compute_pressure()
+&gt;&gt;&gt; lowell.pressure
+775.6025138640499</pre>
+</div>
+<ul class="simple">
+<li>Computes the pressure at the observer’s current elevation,
+using the International Standard Atmosphere.</li>
+</ul>
+<div class="highlight-python"><pre>&gt;&gt;&gt; boston = ephem.city('Boston')
+&gt;&gt;&gt; print('%s %s' % (boston.lat, boston.lon))
+42:21:30.4 -71:03:35.2</pre>
+</div>
+<ul class="simple">
+<li>XEphem includes a small database of world cities.</li>
+<li>Each call to <tt class="docutils literal"><span class="pre">city()</span></tt> returns a new <tt class="docutils literal"><span class="pre">Observer</span></tt>.</li>
+<li>Only latitude, longitude, and elevation are set.</li>
+<li>XEphem can also perform Google geocoding lookups:</li>
+</ul>
+</div></blockquote>
+<p>&nbsp;&gt;&gt;&gt; from ephem import cities
+&nbsp;&gt;&gt;&gt; ven = cities.lookup(‘Ven, Sweden’)</p>
+<blockquote>
+<div><ul class="simple">
+<li>To avoid Google rate limits,
+avoid performing any <tt class="docutils literal"><span class="pre">lookup()</span></tt> more than once —
+instead, print the result to your screen
+and then cut-and-paste the latitude and longitude into your code.</li>
+<li>A <tt class="docutils literal"><span class="pre">ValueError</span></tt> signals a non-existent place.</li>
+</ul>
+</div></blockquote>
+<dl class="docutils">
+<dt>&nbsp;&gt;&gt;&gt; cities.lookup(‘nonsense string’)</dt>
+<dd><dl class="first docutils">
+<dt>Traceback (most recent call last):</dt>
+<dd>...</dd>
+</dl>
+<p class="last">ValueError: Google cannot find a place named ‘nonsense string’</p>
+</dd>
+</dl>
+<div class="section" id="transit-rising-setting">
+<h3>transit, rising, setting<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#transit-rising-setting" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; sitka = ephem.Observer()
+&gt;&gt;&gt; sitka.date = '1999/6/27'
+&gt;&gt;&gt; sitka.lat = '57:10'
+&gt;&gt;&gt; sitka.lon = '-135:15'
+&gt;&gt;&gt; m = ephem.Mars()
+&gt;&gt;&gt; print(sitka.next_transit(m))
+1999/6/27 04:22:45
+&gt;&gt;&gt; print('%s %s' % (m.alt, m.az))
+21:18:33.6 180:00:00.0
+&gt;&gt;&gt; print(sitka.next_rising(m, start='1999/6/28'))
+1999/6/28 23:28:25
+&gt;&gt;&gt; print('%s %s' % (m.alt, m.az))
+-0:00:05.8 111:10:41.6</pre>
+</div>
+<ul>
+<li><p class="first">Eight <tt class="docutils literal"><span class="pre">Observer</span></tt> methods are available
+for finding rising, transit, and setting times:</p>
+<div class="highlight-python"><pre>previous_transit()
+next_transit()
+
+previous_antitransit()
+next_antitransit()
+
+previous_rising()
+next_rising()
+
+previous_setting()
+next_setting()</pre>
+</div>
+</li>
+<li><p class="first">Each takes a <tt class="docutils literal"><span class="pre">Body</span></tt> argument,
+which can be any body except an <tt class="docutils literal"><span class="pre">EarthSatellite</span></tt>
+(for which the <tt class="docutils literal"><span class="pre">next_pass()</span></tt> method below should be used).</p>
+</li>
+<li><p class="first">Starting at the Observer’s <tt class="docutils literal"><span class="pre">date</span></tt>
+they search the entire circuit of the sky
+that the body was making from its previous anti-transit to the next.</p>
+</li>
+<li><p class="first">If the search is successful, returns a <tt class="docutils literal"><span class="pre">Date</span></tt> value.</p>
+</li>
+<li><p class="first">Always leaves the <tt class="docutils literal"><span class="pre">Body</span></tt> at its position on that date.</p>
+</li>
+<li><p class="first">Always leaves the Observer unmodified.</p>
+</li>
+<li><p class="first">Takes an optional <tt class="docutils literal"><span class="pre">start=</span></tt> argument
+giving the date and time
+from which the search for a rising, transit, or setting should commence.</p>
+</li>
+<li><p class="first">We define the meridian as the line
+running overhead from the celestial North pole to the South pole,
+and the anti-meridian as the other half of the same great circle;
+so the transit and anti-transit methods always succeed,
+whether the body crosses the horizon or not.</p>
+</li>
+<li><p class="first">But the rising and setting functions raise exceptions
+if the body does not to cross the horizon;
+the exception hierarchy is:</p>
+<div class="highlight-python"><pre>ephem.CircumpolarError
+ |
+ +--- ephem.AlwaysUpError
+ +--- ephem.NeverUpError</pre>
+</div>
+</li>
+<li><p class="first">Rising and setting are defined
+as the moments when the upper limb of the body touches the horizon
+(that is, when the body’s <tt class="docutils literal"><span class="pre">alt</span></tt> plus <tt class="docutils literal"><span class="pre">radius</span></tt> equals zero).</p>
+</li>
+<li><p class="first">Rising and setting
+are sensitive to atmospheric refraction at the horizon,
+and therefore to the observer’s <tt class="docutils literal"><span class="pre">temp</span></tt> and <tt class="docutils literal"><span class="pre">pressure</span></tt>;
+set the <tt class="docutils literal"><span class="pre">pressure</span></tt> to zero to turn off refraction.</p>
+</li>
+<li><p class="first">Rising and setting pay attention
+to the observer’s <tt class="docutils literal"><span class="pre">horizon</span></tt> attribute;
+see the next section.</p>
+</li>
+</ul>
+<div class="highlight-python"><pre>&gt;&gt;&gt; line1 = "IRIDIUM 80 [+]"
+&gt;&gt;&gt; line2 = "1 25469U 98051C   09119.61415140 -.00000218  00000-0 -84793-4 0  4781"
+&gt;&gt;&gt; line3 = "2 25469  86.4029 183.4052 0002522  86.7221 273.4294 14.34215064557061"
+&gt;&gt;&gt; iridium_80 = ephem.readtle(line1, line2, line3)
+&gt;&gt;&gt; boston.date = '2009/5/1'
+&gt;&gt;&gt; info = boston.next_pass(iridium_80)
+&gt;&gt;&gt; print("Rise time: %s azimuth: %s" % (info[0], info[1]))
+Rise time: 2009/5/1 00:22:15 azimuth: 104:36:16.0</pre>
+</div>
+<ul>
+<li><p class="first">The <tt class="docutils literal"><span class="pre">next_pass()</span></tt> method takes an <tt class="docutils literal"><span class="pre">EarthSatellite</span></tt> body
+and determines when it will next cross above the horizon.</p>
+</li>
+<li><p class="first">It returns a six-element tuple giving:</p>
+<div class="highlight-python"><pre>0  Rise time
+1  Rise azimuth
+2  Maximum altitude time
+3  Maximum altitude
+4  Set time
+5  Set azimuth</pre>
+</div>
+</li>
+<li><p class="first">Any of the tuple values can be <tt class="docutils literal"><span class="pre">None</span></tt> if that event was not found.</p>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="observer-horizon">
+<h3>observer.horizon<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#observer-horizon" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; sun = ephem.Sun()
+&gt;&gt;&gt; greenwich = ephem.Observer()
+&gt;&gt;&gt; greenwich.lat = '51:28:38'
+&gt;&gt;&gt; print(greenwich.horizon)
+0:00:00.0
+&gt;&gt;&gt; greenwich.date = '2007/10/1'
+&gt;&gt;&gt; r1 = greenwich.next_rising(sun)
+&gt;&gt;&gt; greenwich.pressure = 0
+&gt;&gt;&gt; greenwich.horizon = '-0:34'
+&gt;&gt;&gt; greenwich.date = '2007/10/1'
+&gt;&gt;&gt; r2 = greenwich.next_rising(sun)
+&gt;&gt;&gt; print('Visual sunrise: %s' % r1)
+Visual sunrise: 2007/10/1 05:59:30
+&gt;&gt;&gt; print('Naval Observatory sunrise: %s' % r2)
+Naval Observatory sunrise: 2007/10/1 05:59:50</pre>
+</div>
+<ul class="simple">
+<li>The <tt class="docutils literal"><span class="pre">horizon</span></tt> attribute defines your <em>horizon</em>,
+the altitude of the upper limb of a body
+at the moment you consider it to be rising and setting.</li>
+<li>The <tt class="docutils literal"><span class="pre">horizon</span></tt> defaults to zero degrees.</li>
+<li>The United States Naval Observatory,
+rather than computing refraction dynamically,
+uses a constant estimate of 34’ of refraction at the horizon.
+So in the above example,
+rather than attempting to jury-rig values
+for <tt class="docutils literal"><span class="pre">temp</span></tt> and <tt class="docutils literal"><span class="pre">pressure</span></tt>
+that yield the magic 34’,
+we turn off PyEphem refraction entirely
+and define the horizon itself as being at 34’&nbsp;altitude instead.</li>
+<li>To determine
+when a body will rise “high enough” above haze or obstacles,
+set <tt class="docutils literal"><span class="pre">horizon</span></tt> to a positive number of degrees.</li>
+<li>A negative value of <tt class="docutils literal"><span class="pre">horizon</span></tt> can be used
+when an observer is high off of the ground.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="other-observer-methods">
+<h3>other Observer methods<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#other-observer-methods" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; madrid = ephem.city('Madrid')
+&gt;&gt;&gt; madrid.date = '1978/10/3 11:32'
+&gt;&gt;&gt; print(madrid.sidereal_time())
+12:04:28.09</pre>
+</div>
+<ul class="simple">
+<li>Called without arguments.</li>
+<li>Returns the sidereal time for the observer’s circumstances.</li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; ra, dec = madrid.radec_of(0, '90')
+&gt;&gt;&gt; print('%s %s' % (ra, dec))
+12:05:35.12 40:17:49.8</pre>
+</div>
+<ul class="simple">
+<li>Called like <tt class="docutils literal"><span class="pre">radec_of(az,</span> <span class="pre">alt)</span></tt>.</li>
+<li>Returns the apparent topocentric coordinates
+behind the given point in the sky.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<hr class="docutils">
+<div class="section" id="equinoxes-solstices">
+<h2>Equinoxes &amp; Solstices<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#equinoxes-solstices" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; d1 = ephem.next_equinox('2000')
+&gt;&gt;&gt; print(d1)
+2000/3/20 07:35:17
+&gt;&gt;&gt; d2 = ephem.next_solstice(d1)
+&gt;&gt;&gt; print(d2)
+2000/6/21 01:47:51
+&gt;&gt;&gt; t = d2 - d1
+&gt;&gt;&gt; print("Spring lasted %.1f days" % t)
+Spring lasted 92.8 days</pre>
+</div>
+<ul>
+<li><p class="first">Functions take a <tt class="docutils literal"><span class="pre">Date</span></tt> argument.</p>
+</li>
+<li><p class="first">Return a <tt class="docutils literal"><span class="pre">Date</span></tt>.</p>
+</li>
+<li><p class="first">Available functions:</p>
+<div class="highlight-python"><pre>previous_solstice()
+next_solstice()
+
+previous_equinox()
+next_equinox()
+
+previous_vernal_equinox()
+next_vernal_equinox()</pre>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<hr class="docutils">
+<div class="section" id="phases-of-the-moon">
+<h2>Phases of the Moon<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#phases-of-the-moon" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; d1 = ephem.next_full_moon('1984')
+&gt;&gt;&gt; print(d1)
+1984/1/18 14:05:10
+&gt;&gt;&gt; d2 = ephem.next_new_moon(d1)
+&gt;&gt;&gt; print(d2)
+1984/2/1 23:46:25</pre>
+</div>
+<ul>
+<li><p class="first">Functions take a <tt class="docutils literal"><span class="pre">Date</span></tt> argument.</p>
+</li>
+<li><p class="first">Return a <tt class="docutils literal"><span class="pre">Date</span></tt>.</p>
+</li>
+<li><p class="first">Available functions:</p>
+<div class="highlight-python"><pre>previous_new_moon()
+next_new_moon()
+
+previous_first_quarter_moon()
+next_first_quarter_moon()
+
+previous_full_moon()
+next_full_moon()
+
+previous_last_quarter_moon()
+next_last_quarter_moon()</pre>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<hr class="docutils">
+<div class="section" id="angles">
+<h2>Angles<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#angles" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; a = ephem.degrees('180:00:00')
+&gt;&gt;&gt; print(a)
+180:00:00.0
+&gt;&gt;&gt; a
+3.141592653589793
+&gt;&gt;&gt; print("180° is %f radians" % a)
+180° is 3.141593 radians
+&gt;&gt;&gt; h = ephem.hours('1:00:00')
+&gt;&gt;&gt; deg = ephem.degrees(h)
+&gt;&gt;&gt; print("1h right ascension = %s°" % deg)
+1h right ascension = 15:00:00.0°</pre>
+</div>
+<ul>
+<li><p class="first">Many <tt class="docutils literal"><span class="pre">Body</span></tt> and <tt class="docutils literal"><span class="pre">Observer</span></tt> attributes
+return their value as <tt class="docutils literal"><span class="pre">Angle</span></tt> objects.</p>
+</li>
+<li><p class="first">Most angles are measured in degrees.</p>
+</li>
+<li><p class="first">Only right ascension is measured in hours.</p>
+</li>
+<li><p class="first">You can also create angles yourself through two <tt class="docutils literal"><span class="pre">ephem</span></tt> functions:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">degrees()</span></tt> — return an <tt class="docutils literal"><span class="pre">Angle</span></tt> in degrees</div>
+<div class="line"><tt class="docutils literal"><span class="pre">hours()</span></tt> — return an <tt class="docutils literal"><span class="pre">Angle</span></tt> in hours</div>
+</div>
+</li>
+<li><p class="first">Each angle acts like a Python <tt class="docutils literal"><span class="pre">float</span></tt>.</p>
+</li>
+<li><p class="first">Angles always store floating-point radians.</p>
+</li>
+<li><p class="first">Only when printed, passed to <tt class="docutils literal"><span class="pre">str()</span></tt>, or formatted with <tt class="docutils literal"><span class="pre">'%s'</span></tt>
+do angles display themselves as degrees or hours.</p>
+</li>
+<li><p class="first">When setting an angle attribute in a body or observer,
+or creating angles yourself,
+you can provide either floating-point radians
+or a string with degrees or hours.
+The following angles are equivalent:</p>
+<div class="highlight-python"><pre>ephem.degrees(ephem.pi / 32)
+ephem.degrees('5.625')
+ephem.degrees('5:37.5')
+ephem.degrees('5:37:30')
+ephem.degrees('5:37:30.0')
+ephem.hours('0.375')
+ephem.hours('0:22.5')
+ephem.hours('0:22:30')
+ephem.hours('0:22:30.0')</pre>
+</div>
+</li>
+<li><p class="first">When doing math on angles,
+the results will often exceed the normal bounds for an angle.
+Therefore two attributes are provided for each angle:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">norm</span></tt> — returns angle normalized to [0,&nbsp;2π).</div>
+<div class="line"><tt class="docutils literal"><span class="pre">znorm</span></tt> — returns angle normalized to&nbsp;[-π, π).</div>
+</div>
+</li>
+<li><p class="first">For more details see the <a class="reference external" href="http://rhodesmill.org/pyephem/angle">Angle</a> document.</p>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<hr class="docutils">
+<div class="section" id="dates">
+<h2>Dates<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#dates" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; d = ephem.Date('1997/3/9 5:13')
+&gt;&gt;&gt; print(d)
+1997/3/9 05:13:00
+&gt;&gt;&gt; d
+35496.717361111114
+&gt;&gt;&gt; d.triple()
+(1997, 3, 9.21736111111386)
+&gt;&gt;&gt; d.tuple()
+(1997, 3, 9, 5, 13, 2.3748725652694702e-07)
+&gt;&gt;&gt; d + ephem.hour
+35496.75902777778
+&gt;&gt;&gt; print(ephem.date(d + ephem.hour))
+1997/3/9 06:13:00
+&gt;&gt;&gt; print(ephem.date(d + 1))
+1997/3/10 05:13:00</pre>
+</div>
+<ul>
+<li><p class="first">Dates are stored and returned as floats.</p>
+</li>
+<li><p class="first">Only when printed, passed to <tt class="docutils literal"><span class="pre">str()</span></tt>, or formatted with <tt class="docutils literal"><span class="pre">'%s'</span></tt>
+does a date express itself as a string
+giving the calendar day and time.</p>
+</li>
+<li><p class="first">The modern Gregorian calendar is used for recent dates,
+and the old Julian calendar for dates before October&nbsp;15,&nbsp;1582.</p>
+</li>
+<li><p class="first">Dates <em>always</em> use Universal Time, <em>never</em> your local time zone.</p>
+</li>
+<li><p class="first">Call <tt class="docutils literal"><span class="pre">.triple()</span></tt> to split a date into its year, month, and day.</p>
+</li>
+<li><p class="first">Call <tt class="docutils literal"><span class="pre">.tuple()</span></tt> to split a date into its year, month, day,
+hour, minute, and second.</p>
+</li>
+<li><p class="first">You can create <tt class="docutils literal"><span class="pre">ephem.Date()</span></tt> dates yourself
+in addition to those you will be returned by other objects.</p>
+</li>
+<li><p class="first">Call <tt class="docutils literal"><span class="pre">ephem.now()</span></tt> for the current date and time.</p>
+</li>
+<li><p class="first">When setting a date attribute in a body or observer,
+or creating angles yourself,
+you can provide either floating-point radians, a string, or a tuple.
+The following dates are equivalent:</p>
+<div class="highlight-python"><pre>ephem.Date(35497.7197916667)
+ephem.Date('1997/3/10.2197916667')
+ephem.Date('1997/3/10 05.275')
+ephem.Date('1997/3/10 05:16.5')
+ephem.Date('1997/3/10 05:16:30')
+ephem.Date('1997/3/10 05:16:30.0')
+ephem.Date((1997, 3, 10.2197916667))
+ephem.Date((1997, 3, 10, 5, 16, 30.0))</pre>
+</div>
+</li>
+<li><p class="first">Dates store the number of days that have passed
+since noon Universal Time on the last day of&nbsp;1899.
+By adding and subtracting whole numbers from dates,
+you can move several days into the past or future.
+If you want to move by smaller amounts,
+the following constants may be helpful:</p>
+<div class="highlight-python"><pre>ephem.hour
+ephem.minute
+ephem.second</pre>
+</div>
+</li>
+<li><p class="first">For more details see the <a class="reference external" href="http://rhodesmill.org/pyephem/date">Date</a> document.</p>
+</li>
+</ul>
+</div></blockquote>
+<div class="section" id="local-time">
+<h3>local time<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#local-time" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; d = ephem.Date('1997/3/9 5:13')
+&gt;&gt;&gt; ephem.localtime(d)
+datetime.datetime(1997, 3, 9, 0, 13, 0, 6)
+&gt;&gt;&gt; print(ephem.localtime(d))
+1997-03-09 00:13:00.000006</pre>
+</div>
+<ul class="simple">
+<li>The <tt class="docutils literal"><span class="pre">localtime()</span></tt> function converts a PyEphem date
+into a Python <tt class="docutils literal"><span class="pre">datetime</span></tt> object expressed in your local time zone.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<hr class="docutils">
+<div class="section" id="stars-and-cities">
+<h2>Stars and Cities<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#stars-and-cities" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; rigel = ephem.star('Rigel')
+&gt;&gt;&gt; print('%s %s' % (rigel._ra, rigel._dec))
+5:14:32.30 -8:12:06.0</pre>
+</div>
+<ul class="simple">
+<li>PyEphem provides a catalog of bright stars.</li>
+<li>Each call to <tt class="docutils literal"><span class="pre">star()</span></tt> returns a new <tt class="docutils literal"><span class="pre">FixedBody</span></tt>
+whose coordinates are those of the named star.</li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><div class="highlight-python"><pre>&gt;&gt;&gt; stuttgart = ephem.city('Stuttgart')
+&gt;&gt;&gt; print(stuttgart.lon)
+9:10:50.8
+&gt;&gt;&gt; print(stuttgart.lat)
+48:46:37.6</pre>
+</div>
+<ul class="simple">
+<li>PyEphem knows 122 world cities.</li>
+<li>The <tt class="docutils literal"><span class="pre">city()</span></tt> function returns an <tt class="docutils literal"><span class="pre">Observer</span></tt>
+whose longitude, latitude, and elevation
+are those of the given city.</li>
+</ul>
+</div></blockquote>
+</div>
+<hr class="docutils">
+<div class="section" id="other-constants">
+<h2>Other Constants<a class="headerlink" href="http://rhodesmill.org/pyephem/quick#other-constants" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p class="first">PyEphem provides constants
+for the dates of a few major star-atlas epochs:</p>
+<div class="highlight-python"><pre>B1900
+B1950
+J2000</pre>
+</div>
+</li>
+<li><p class="first">PyEphem provides, for reference,
+the length of four distances, all in meters:</p>
+<div class="highlight-python"><pre>ephem.meters_per_au
+ephem.earth_radius
+ephem.moon_radius
+ephem.sun_radius</pre>
+</div>
+</li>
+<li><p class="first">PyEphem provides the speed of light in meters per second:</p>
+<div class="highlight-python"><pre>ephem.c</pre>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="http://rhodesmill.org/pyephem/genindex.html" title="General Index">index</a></li>
+        <li class="right">
+          <a href="http://rhodesmill.org/pyephem/tutorial.html" title="The PyEphem Tutorial">next</a> |</li>
+        <li class="right">
+          <a href="http://rhodesmill.org/pyephem/index.html" title="Welcome!">previous</a> |</li>
+        <li><a href="http://rhodesmill.org/pyephem/index.html">PyEphem home page</a> »</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        © Copyright 2008, Brandon Craig Rhodes.
+      Last updated on Dec 24, 2014.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  
+</body></html>
