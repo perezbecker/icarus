@@ -18,4 +18,4 @@ try:
   GPIO.output(12, False)
 
 except KeyboardInterrupt:
-  GPIO.output(18, False)
+  GPIO.output(12, False)
