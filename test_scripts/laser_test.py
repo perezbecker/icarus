@@ -14,7 +14,7 @@ GPIO.output(12, False)
 
 try:
   GPIO.output(12, True)
-  time.sleep(20)
+  time.sleep(240)
   GPIO.output(12, False)
 
 except KeyboardInterrupt:
