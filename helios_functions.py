@@ -11,7 +11,7 @@ call(["sudo", "gpsd", "/dev/ttyAMA0","-F","/var/run/gpsd.sock"])
 READDATA = 2
 WRITE_DATA = 3
 
-ServoSpeed = 150 #100
+ServoSpeed = 80 #100
 ServoDelay = 1 #1
 
 
@@ -77,7 +77,7 @@ def resetdyn():
 
 def movedyn(position_ID1, position_ID2):
 
-    if(position_ID1 >= 1 and position_ID1 <= 1023 and position_ID2 >= 205 and position_ID2 <= 819):
+    if(position_ID1 >= 211 and position_ID1 <= 811 and position_ID2 >= 300 and position_ID2 <= 730):
     
         #Move Dynamixel 1
     

@@ -75,5 +75,5 @@ for i in xrange(60):
     if(hf.az_to_pos1(icarus_az) >= 1 and hf.az_to_pos1(icarus_az) <= 1023):
         if(hf.alt_to_pos2(icarus_alt) >= 205 and hf.alt_to_pos2(icarus_alt) <= 819): 
             hf.movedyn(hf.az_to_pos1(icarus_az),hf.alt_to_pos2(icarus_alt))
-            t.sleep(5)
+            t.sleep(0.2)
 	    
